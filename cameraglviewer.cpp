@@ -15,12 +15,17 @@ void mt4sd::CameraGLViewer::initializeGL()
     // Initialize OpenGL Backend
     initializeOpenGLFunctions();
 
-    //connect(this, SIGNAL(frameSwapped()), this, SLOT(update())); //Just wheter you want a continue rendering
     printContextInformation();
 
     // Set global information
     glEnable(GL_CULL_FACE);
-    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+//    glClearColor(0, 0, 0, 1);
+//    glEnable(GL_DEPTH_TEST);
+//    glEnable(GL_LIGHT0);
+//    glEnable(GL_LIGHTING);
+//    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+//    glEnable(GL_COLOR_MATERIAL);
 }
 
 void mt4sd::CameraGLViewer::resizeGL(int width, int height)
