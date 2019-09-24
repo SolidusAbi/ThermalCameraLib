@@ -12,6 +12,9 @@ namespace mt4sd{
         ThermalCameraLib();
         ThermalCameraLib(mt4sd::Camera device);
 
+        ~ThermalCameraLib();
+
+
         int connect();
 
     private:

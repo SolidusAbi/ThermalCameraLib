@@ -1,9 +1,6 @@
 #include "thermalcameralib.h"
 
-mt4sd::ThermalCameraLib::ThermalCameraLib()
-{
-}
-
+mt4sd::ThermalCameraLib::ThermalCameraLib(){}
 
 mt4sd::ThermalCameraLib::ThermalCameraLib(mt4sd::Camera device)
 {
@@ -15,6 +12,8 @@ mt4sd::ThermalCameraLib::ThermalCameraLib(mt4sd::Camera device)
         this->connected = false;
 
 }
+
+mt4sd::ThermalCameraLib::~ThermalCameraLib(){}
 
 int mt4sd::ThermalCameraLib::connect(){
 
