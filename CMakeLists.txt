@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(ThermalCameraLib LANGUAGES CXX)
+project(ThermalCameraLib VERSION 0.01
+                         LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
@@ -22,6 +23,7 @@ add_library(ThermalCameraLib SHARED
   cameraglviewer.cpp
 )
 
+#target_include_directories(ThermalCameraLib PUBLIC include)
 target_link_libraries(ThermalCameraLib PRIVATE Qt5::Core Qt5::Widgets usb-1.0)
 
 target_compile_definitions(ThermalCameraLib PRIVATE THERMALCAMERALIB_LIBRARY)

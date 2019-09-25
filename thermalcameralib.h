@@ -2,6 +2,7 @@
 #define THERMALCAMERALIB_H
 
 #include "ThermalCameraLib_global.h"
+#include <QImage>
 #include <libusb-1.0/libusb.h>
 
 
@@ -14,9 +15,14 @@ namespace mt4sd{
 
         ~ThermalCameraLib();
 
-
         int connect();
 
+        QImage * getDisplayFrame();
+
+        inline bool isConnected(){ return connected; }
+        inline int getFrameWidth(){ return frameWidth; }
+        inline int getFrameHeight(){ return frameHeight; }
+        inline int getFrameSize(){ return frameSize; }
     private:
         mt4sd::Camera device;
         mt4sd::TE_Setting setting;
@@ -25,10 +31,17 @@ namespace mt4sd{
         bool connected;
 
         int rawSize = 384*296*2; //raw frame size in bytes
-        int frameSize = 384*288; //number of actual pixels
+        int frameWidth = 384;
+        int frameHeight = 288;
+        int frameSize = frameWidth*frameHeight; //number of actual pixels
 
+        unsigned char *rawFrame = new unsigned char[rawSize];
+        unsigned short *frame = new unsigned short[frameSize];
+        QImage *displayableFrame;
 
         int readRawFrame(int size, unsigned char *frame);
+        void getShortFrame(unsigned char *raw, int imageSizePixels, int offsetBytes, unsigned short *frame);
+        void getDisplayFrame(unsigned short *frame, int size, unsigned char *display);
     };
 }
 
