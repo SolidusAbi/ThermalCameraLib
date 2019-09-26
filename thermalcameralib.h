@@ -4,6 +4,7 @@
 #include "ThermalCameraLib_global.h"
 #include <QImage>
 #include <libusb-1.0/libusb.h>
+//#include <i3system/i3system_TE.h>
 
 
 namespace mt4sd{
@@ -11,7 +12,7 @@ namespace mt4sd{
     {
     public:
         ThermalCameraLib();
-        ThermalCameraLib(mt4sd::Camera device);
+        ThermalCameraLib(mt4sd::CameraType device);
 
         ~ThermalCameraLib();
 
@@ -24,7 +25,7 @@ namespace mt4sd{
         inline int getFrameHeight(){ return frameHeight; }
         inline int getFrameSize(){ return frameSize; }
     private:
-        mt4sd::Camera device;
+        mt4sd::CameraType device;
         mt4sd::TE_Setting setting;
         libusb_device_handle *dev_handle; //a device handle
         libusb_context *ctx = nullptr;

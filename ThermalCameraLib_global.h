@@ -11,7 +11,7 @@
 
 namespace mt4sd
 {
-    enum Camera
+    enum CameraType
     {
         I3_TE_Q1 = 1,
         DEFAULT

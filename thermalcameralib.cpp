@@ -3,7 +3,7 @@
 
 mt4sd::ThermalCameraLib::ThermalCameraLib(){}
 
-mt4sd::ThermalCameraLib::ThermalCameraLib(mt4sd::Camera device)
+mt4sd::ThermalCameraLib::ThermalCameraLib(mt4sd::CameraType device)
 {
     this->device = device;
     this->displayableFrame = new QImage(new uchar[this->getFrameSize()], this->getFrameWidth(), this->getFrameHeight(), QImage::Format::Format_Grayscale8);
