@@ -25,17 +25,19 @@ message("${HEADERS_FILES}")
 
 add_library(ThermalCameraLib SHARED)
 
-target_sources(ThermalCameraLib PUBLIC
-    include/Camera.h
-    include/CameraGLViewer.h
-    include/TEQ1Camera.h
-    include/thermalcameralib.h
-    include/ThermalCameraLib_global.h
-)
+#target_sources(ThermalCameraLib PUBLIC
+#    include/Camera.h
+#    include/CameraGLViewer.h
+#    include/TEQ1Camera.h
+#    include/thermalcameralib.h
+#    include/ThermalCameraLib_global.h
+#)
 
 add_subdirectory("src/")
 
-target_include_directories(ThermalCameraLib PUBLIC include)
+target_include_directories(ThermalCameraLib PUBLIC include/ThermalCameraLib)
+target_compile_features(ThermalCameraLib PUBLIC cxx_std_11)
+
 include_directories(/usr/local/include/i3system)
 link_directories(/usr/local/lib)
 target_link_libraries(ThermalCameraLib PRIVATE Qt5::Core Qt5::Widgets i3system_imgproc_64 i3system_usb_64 i3system_te_64 usb-1.0)
