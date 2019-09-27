@@ -5,13 +5,13 @@
 #include <QOpenGLWidget>
 #include <QOpenGLFunctions>
 
-#include "thermalcameralib.h"
+#include "Camera.h"
 
 namespace mt4sd {
     class THERMALCAMERALIB_EXPORT CameraGLViewer : public QOpenGLWidget, protected QOpenGLFunctions
     {
     public:
-        CameraGLViewer(mt4sd::ThermalCameraLib *camera);
+        CameraGLViewer(mt4sd::Camera *camera);
 
         void initializeGL();
         void resizeGL(int width, int height);
@@ -24,7 +24,7 @@ namespace mt4sd {
 
     private:
         void printContextInformation();
-        mt4sd::ThermalCameraLib *camera;
+        mt4sd::Camera *camera;
     };
 }
 #endif // CAMERAGLVIEWER_H

@@ -6,9 +6,14 @@
 #  I3SYSTEM_LIBRARIES - Link these to use i3system
 #  I3SYSTEM_DEFINITIONS - Compiler switches required for using i3system
 
+IF (CMAKE_HOST_WIN32)
+    message("OLA KE ASE")
+endif(CMAKE_HOST_WIN32)
+
+
 if (I3SYSTEM_LIBRARIES AND I3SYSTEM_INCLUDE_DIRS)
-  # in cache already
-  set(I3SYSTEM_FOUND TRUE)
+# in cache already
+set(I3SYSTEM_FOUND TRUE)
 else (I3SYSTEM_LIBRARIES AND I3SYSTEM_INCLUDE_DIRS)
     find_path(I3SYSTEM_INCLUDE_DIR
         NAMES
@@ -77,3 +82,6 @@ else (I3SYSTEM_LIBRARIES AND I3SYSTEM_INCLUDE_DIRS)
     endif (I3SYSTEM_FOUND)
 
 endif (I3SYSTEM_LIBRARIES AND I3SYSTEM_INCLUDE_DIRS)
+
+
+#message(${CMAKE_HOST_WIN32})

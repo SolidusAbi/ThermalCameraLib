@@ -1,11 +1,14 @@
 #include "TEQ1Camera.h"
 
-mt4sd::TEQ1Camera::TEQ1Camera():
-    Camera(384, 288)
+mt4sd::TEQ1Camera::TEQ1Camera() :
+    Camera()
 {
-    pImgBuf = new unsigned short[getFrameSize()];
-    displayableFrame = new QImage(new uchar[getFrameSize()], getFrameWidth(), getFrameHeight(), QImage::Format::Format_Grayscale8);
-    this->connect();
+    if (this->connect()){
+        this->frameWidth = pTE->GetImageWidth();
+        this->frameHeight = pTE->GetImageHeight();
+        pImgBuf = new unsigned short[getFrameSize()];
+        displayableFrame = new QImage(new uchar[getFrameSize()], getFrameWidth(), getFrameHeight(), QImage::Format::Format_Grayscale8);
+    }
 }
 
 mt4sd::TEQ1Camera::~TEQ1Camera(){

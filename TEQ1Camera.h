@@ -6,11 +6,11 @@
 #include <i3system/i3system_TE.h>
 
 namespace mt4sd {
-    class TEQ1Camera : public Camera
+    class THERMALCAMERALIB_EXPORT TEQ1Camera : public Camera
     {
         public:
             TEQ1Camera();
-            ~TEQ1Camera();
+            ~TEQ1Camera() override;
 
             QImage * getDisplayFrame() override;
             bool connect() override;

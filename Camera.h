@@ -1,13 +1,14 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
+#include "ThermalCameraLib_global.h"
 #include <QImage>
 
 namespace mt4sd {
-    class Camera {
+    class THERMALCAMERALIB_EXPORT Camera {
         public:
-            Camera (int frameWidth, int frameHeight);
-            virtual ~Camera ();
+            Camera();
+            virtual ~Camera();
             virtual QImage *getDisplayFrame() = 0;
 
             virtual bool connect() = 0;
@@ -16,9 +17,10 @@ namespace mt4sd {
             inline int getFrameWidth(){ return frameWidth; }
             inline int getFrameHeight(){ return frameHeight; }
             inline int getFrameSize(){ return getFrameWidth()*getFrameHeight(); }
-        private:
+        protected:
             int frameWidth;
             int frameHeight;
+            QImage *displayableFame;
     };
 }
 

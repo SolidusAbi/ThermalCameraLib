@@ -4,7 +4,7 @@
 #include <QPainter>
 #include <QDebug>
 
-mt4sd::CameraGLViewer::CameraGLViewer(mt4sd::ThermalCameraLib *camera)
+mt4sd::CameraGLViewer::CameraGLViewer(mt4sd::Camera *camera)
     :QOpenGLWidget()
 {
     this->camera = camera;

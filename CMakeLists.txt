@@ -25,11 +25,14 @@ add_library(ThermalCameraLib SHARED
   cameraglviewer.h
   cameraglviewer.cpp
   Camera.h
+  Camera.cpp
   TEQ1Camera.h
   TEQ1Camera.cpp
 )
 
 #target_include_directories(ThermalCameraLib PUBLIC include)
-target_link_libraries(ThermalCameraLib PRIVATE Qt5::Core Qt5::Widgets ${I3SYSTEM_LIBRARIES} usb-1.0)
+include_directories(/usr/local/include/i3system)
+link_directories(/usr/local/lib)
+target_link_libraries(ThermalCameraLib PRIVATE Qt5::Core Qt5::Widgets i3system_imgproc_64 i3system_usb_64 i3system_te_64 usb-1.0)
 
 target_compile_definitions(ThermalCameraLib PRIVATE THERMALCAMERALIB_LIBRARY)
