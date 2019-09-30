@@ -10,21 +10,23 @@
 namespace mt4sd {
     class THERMALCAMERALIB_EXPORT CameraGLViewer : public QOpenGLWidget, protected QOpenGLFunctions
     {
-    public:
-        CameraGLViewer(mt4sd::Camera *camera);
+        Q_OBJECT
+        public:
+            CameraGLViewer(QWidget *parent = nullptr);
+            CameraGLViewer(mt4sd::Camera *camera, QWidget *parent = nullptr);
 
-        void initializeGL();
-        void resizeGL(int width, int height);
-        void paintGL();
+            void initializeGL();
+            void resizeGL(int width, int height);
+            void paintGL();
 
-        /**
-        *	@brief Clean the OpenGL visualization
-        */
-        void cleanGL();
+            /**
+            *	@brief Clean the OpenGL visualization
+            */
+            void cleanGL();
 
-    private:
-        void printContextInformation();
-        mt4sd::Camera *camera;
-    };
+        private:
+            void printContextInformation();
+            mt4sd::Camera *camera;
+        };
 }
 #endif // CAMERAGLVIEWER_H

@@ -5,18 +5,23 @@
 #include <QImage>
 
 namespace mt4sd {
-    class THERMALCAMERALIB_EXPORT Camera {
+    class THERMALCAMERALIB_EXPORT Camera : public QObject
+    {
+        Q_OBJECT
+
         public:
             Camera();
             virtual ~Camera();
             virtual QImage *getDisplayFrame() = 0;
 
-            virtual bool connect() = 0;
-            virtual bool disconnect() = 0;
-
             inline int getFrameWidth(){ return frameWidth; }
             inline int getFrameHeight(){ return frameHeight; }
             inline int getFrameSize(){ return getFrameWidth()*getFrameHeight(); }
+
+        public slots:
+            virtual bool connect() = 0;
+            virtual bool disconnect() = 0;
+
         protected:
             int frameWidth;
             int frameHeight;

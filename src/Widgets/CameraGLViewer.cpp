@@ -4,8 +4,21 @@
 #include <QPainter>
 #include <QDebug>
 
-mt4sd::CameraGLViewer::CameraGLViewer(mt4sd::Camera *camera)
-    :QOpenGLWidget()
+mt4sd::CameraGLViewer::CameraGLViewer(QWidget *parent)
+    :QOpenGLWidget(parent)
+{
+    this->camera = nullptr;
+
+    QSurfaceFormat format;
+    format.setRenderableType(QSurfaceFormat::OpenGL);
+    format.setProfile(QSurfaceFormat::CoreProfile);
+    format.setSwapInterval(1);
+    this->setFormat(format);
+}
+
+
+mt4sd::CameraGLViewer::CameraGLViewer(mt4sd::Camera *camera, QWidget *parent)
+    :QOpenGLWidget(parent)
 {
     this->camera = camera;
 

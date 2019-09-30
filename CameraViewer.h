@@ -1,13 +1,13 @@
 #ifndef CAMERAVIEWER_H
 #define CAMERAVIEWER_H
 
-#include <QDockWidget>
+#include <QWidget>
 
 namespace Ui {
 class CameraViewer;
 }
 
-class CameraViewer : public QDockWidget
+class CameraViewer : public QWidget
 {
     Q_OBJECT
 

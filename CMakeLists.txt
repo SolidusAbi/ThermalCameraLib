@@ -36,8 +36,9 @@ target_sources(ThermalCameraLib PUBLIC
 add_subdirectory("src/")
 
 target_include_directories(ThermalCameraLib PUBLIC include/ThermalCameraLib)
+target_include_directories(ThermalCameraLib PRIVATE /usr/local/include/i3system)
 
-include_directories(/usr/local/include/i3system)
+#include_directories(/usr/local/include/i3system)
 link_directories(/usr/local/lib)
 target_link_libraries(ThermalCameraLib PRIVATE Qt5::Core Qt5::Widgets i3system_imgproc_64 i3system_usb_64 i3system_te_64 usb-1.0)
 
