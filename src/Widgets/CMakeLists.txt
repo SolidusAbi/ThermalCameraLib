@@ -7,6 +7,8 @@
 #    PARENT_SCOPE
 #)
 
+set(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_CURRENT_SOURCE_DIR}/ui)
+
 target_sources(ThermalCameraLib PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/CameraGLViewer.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/cameraviewer.cpp
