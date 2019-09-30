@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.9)
 
 project(ThermalCameraLib VERSION 0.01
                          LANGUAGES CXX)
@@ -25,18 +25,17 @@ message("${HEADERS_FILES}")
 
 add_library(ThermalCameraLib SHARED)
 
-#target_sources(ThermalCameraLib PUBLIC
-#    include/Camera.h
-#    include/CameraGLViewer.h
-#    include/TEQ1Camera.h
-#    include/thermalcameralib.h
-#    include/ThermalCameraLib_global.h
-#)
+target_sources(ThermalCameraLib PUBLIC
+    include/ThermalCameraLib/Camera.h
+    include/ThermalCameraLib/CameraGLViewer.h
+    include/ThermalCameraLib/TEQ1Camera.h
+    include/ThermalCameraLib/thermalcameralib.h
+    include/ThermalCameraLib/ThermalCameraLib_global.h
+)
 
 add_subdirectory("src/")
 
 target_include_directories(ThermalCameraLib PUBLIC include/ThermalCameraLib)
-target_compile_features(ThermalCameraLib PUBLIC cxx_std_11)
 
 include_directories(/usr/local/include/i3system)
 link_directories(/usr/local/lib)

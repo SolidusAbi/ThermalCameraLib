@@ -1,5 +1,5 @@
 #include "cameraviewer.h"
-#include "ui_cameraviewer.h"
+#include "ui/ui_cameraviewer.h"
 
 CameraViewer::CameraViewer(QWidget *parent) :
     QDockWidget(parent),

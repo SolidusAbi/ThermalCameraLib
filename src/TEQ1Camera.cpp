@@ -1,4 +1,5 @@
 #include "TEQ1Camera.h"
+#include <iostream>
 
 mt4sd::TEQ1Camera::TEQ1Camera() :
     Camera()
@@ -20,6 +21,12 @@ mt4sd::TEQ1Camera::~TEQ1Camera(){
 QImage * mt4sd::TEQ1Camera::getDisplayFrame()
 {
     this->pTE->RecvImage(this->pImgBuf);
+//    // TEST!!!
+//    float *temperature =new float[getFrameSize()];
+//    this->pTE->CalcEntireTemp(temperature);
+//    for (int i = 10 - 1; i >= 0; i--)
+//        std::cout << temperature[i] << std::endl;
+//    // ---- //
     getDisplayFrame(this->pImgBuf, this->getFrameSize(), displayableFrame->bits());
     return displayableFrame;
 }
@@ -56,7 +63,8 @@ void mt4sd::TEQ1Camera::getDisplayFrame(unsigned short *frame, int size, unsigne
     unsigned short min = 65535;
     unsigned short max = 0;
     //get min/max values -> AGC
-    for(int i=0;i<size;i++){
+    for(int i=0; i<size; i++)
+    {
         min = frame[i] < min ? frame[i] : min;
         max = frame[i] > max ? frame[i] : max;
     }
@@ -64,7 +72,8 @@ void mt4sd::TEQ1Camera::getDisplayFrame(unsigned short *frame, int size, unsigne
     //now scale ouput data
     //TBD: flip upside down!
     double invDelta = 1.0 / (static_cast<double>(max-min));
-    for(int i=0;i<size;i++){
+    for(int i=0;i<size;i++)
+    {
         display[i] = static_cast<unsigned char>((255.0 * (frame[i] - min)) * invDelta);
     }
 }

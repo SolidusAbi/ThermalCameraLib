@@ -13,7 +13,7 @@ mt4sd::CameraGLViewer::CameraGLViewer(mt4sd::Camera *camera)
     format.setRenderableType(QSurfaceFormat::OpenGL);
     format.setProfile(QSurfaceFormat::CoreProfile);
     format.setSwapInterval(1);
-    setFormat(format);
+    this->setFormat(format);
 }
 
 void mt4sd::CameraGLViewer::initializeGL()
