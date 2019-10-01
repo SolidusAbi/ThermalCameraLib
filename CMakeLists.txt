@@ -29,6 +29,7 @@ target_sources(ThermalCameraLib PUBLIC
     include/ThermalCameraLib/Camera.h
     include/ThermalCameraLib/CameraGLViewer.h
     include/ThermalCameraLib/TEQ1Camera.h
+    include/ThermalCameraLib/CameraViewer.h
     include/ThermalCameraLib/thermalcameralib.h
     include/ThermalCameraLib/ThermalCameraLib_global.h
 )

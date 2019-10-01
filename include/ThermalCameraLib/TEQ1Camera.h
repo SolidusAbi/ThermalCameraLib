@@ -13,8 +13,11 @@ namespace mt4sd {
             ~TEQ1Camera() override;
 
             QImage * getDisplayFrame() override;
+
+        public slots:
             bool connect() override;
             bool disconnect() override;
+
         private:
             i3::TE_B *pTE;
             unsigned short *pImgBuf;

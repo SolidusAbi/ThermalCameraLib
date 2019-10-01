@@ -14,6 +14,7 @@ namespace mt4sd {
         public:
             CameraGLViewer(QWidget *parent = nullptr);
             CameraGLViewer(mt4sd::Camera *camera, QWidget *parent = nullptr);
+            ~CameraGLViewer();
 
             void initializeGL();
             void resizeGL(int width, int height);
@@ -24,8 +25,16 @@ namespace mt4sd {
             */
             void cleanGL();
 
+            inline void setCamera(mt4sd::Camera *camera) { this->camera = camera; }
+            inline mt4sd::Camera * getCamera() { return camera; }
+
+        public slots:
+            void pause();
+            void resume();
+
         private:
             void printContextInformation();
+            void prepareFormat();
             mt4sd::Camera *camera;
         };
 }

@@ -2,6 +2,7 @@
 #define CAMERAVIEWER_H
 
 #include <QWidget>
+#include "Camera.h"
 
 namespace Ui {
     class CameraViewer;
@@ -17,13 +18,16 @@ namespace mt4sd {
         explicit CameraViewer(QWidget *parent = nullptr);
         ~CameraViewer();
 
-    private:
-        Ui::CameraViewer *ui;
+        void setCamera(mt4sd::Camera *camera);
+        mt4sd::Camera * getCamera();
 
     public slots:
         void play();
         void stop();
+        void snapshot();
 
+    private:
+        Ui::CameraViewer *ui;
     };
 }
 

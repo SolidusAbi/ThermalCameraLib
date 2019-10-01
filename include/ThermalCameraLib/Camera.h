@@ -21,6 +21,7 @@ namespace mt4sd {
         public slots:
             virtual bool connect() = 0;
             virtual bool disconnect() = 0;
+            bool save(const char *filename); //Aquí no debería ir
 
         protected:
             int frameWidth;

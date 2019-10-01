@@ -8,12 +8,7 @@ mt4sd::CameraGLViewer::CameraGLViewer(QWidget *parent)
     :QOpenGLWidget(parent)
 {
     this->camera = nullptr;
-
-    QSurfaceFormat format;
-    format.setRenderableType(QSurfaceFormat::OpenGL);
-    format.setProfile(QSurfaceFormat::CoreProfile);
-    format.setSwapInterval(1);
-    this->setFormat(format);
+    prepareFormat();
 }
 
 
@@ -21,12 +16,12 @@ mt4sd::CameraGLViewer::CameraGLViewer(mt4sd::Camera *camera, QWidget *parent)
     :QOpenGLWidget(parent)
 {
     this->camera = camera;
+    prepareFormat();
+}
 
-    QSurfaceFormat format;
-    format.setRenderableType(QSurfaceFormat::OpenGL);
-    format.setProfile(QSurfaceFormat::CoreProfile);
-    format.setSwapInterval(1);
-    this->setFormat(format);
+mt4sd::CameraGLViewer::~CameraGLViewer(){
+    disconnect(SIGNAL(frameSwapped()), this);
+    delete camera;
 }
 
 void mt4sd::CameraGLViewer::initializeGL()
@@ -38,14 +33,8 @@ void mt4sd::CameraGLViewer::initializeGL()
     printContextInformation();
 
     // Set global information
-    //glEnable(GL_CULL_FACE);
+    //glEnable(GL_CULL_FACE); //Si lo activo, deja de verse...
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-//    glClearColor(0, 0, 0, 1);
-//    glEnable(GL_DEPTH_TEST);
-//    glEnable(GL_LIGHT0);
-//    glEnable(GL_LIGHTING);
-//    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
-//    glEnable(GL_COLOR_MATERIAL);
 }
 
 void mt4sd::CameraGLViewer::resizeGL(int width, int height)
@@ -55,23 +44,22 @@ void mt4sd::CameraGLViewer::resizeGL(int width, int height)
 
 void mt4sd::CameraGLViewer::paintGL()
 {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    if (camera != nullptr){
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-//    glBegin(GL_TRIANGLES);
-//    glColor3f(1.0, 0.0, 0.0);
-//    glVertex3f(-0.5, -0.5, 0);
-//    glColor3f(0.0, 1.0, 0.0);
-//    glVertex3f(0.5, -0.5, 0);
-//    glColor3f(0.0, 0.0, 1.0);
-//    glVertex3f(0.0, 0.5, 0);
-//    glEnd();
+        QPainter p(this);
+        p.drawImage(this->rect(), *this->camera->getDisplayFrame());
+    }
+}
 
-//    QPainter p(this);
-//    p.setPen(Qt::red);
-//    p.drawLine(rect().topLeft(), rect().bottomRight());
+void mt4sd::CameraGLViewer::resume()
+{
+    connect(this, SIGNAL(frameSwapped()), this, SLOT(update()));
+}
 
-    QPainter p(this);
-    p.drawImage(this->rect(), *this->camera->getDisplayFrame());
+void mt4sd::CameraGLViewer::pause()
+{
+    disconnect(SIGNAL(frameSwapped()), this);
 }
 
 void mt4sd::CameraGLViewer::printContextInformation()
@@ -96,3 +84,14 @@ void mt4sd::CameraGLViewer::printContextInformation()
     // qPrintable() will print our QString w/o quotes around it.
     qDebug() << qPrintable(glType) << qPrintable(glVersion) << "(" << qPrintable(glProfile) << ")";
 }
+
+void mt4sd::CameraGLViewer::prepareFormat()
+{
+    QSurfaceFormat format;
+    format.setRenderableType(QSurfaceFormat::OpenGL);
+    format.setProfile(QSurfaceFormat::CoreProfile);
+    format.setSwapInterval(1);
+
+    setFormat(format);
+}
+
