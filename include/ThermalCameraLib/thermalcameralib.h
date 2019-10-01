@@ -4,8 +4,6 @@
 #include "ThermalCameraLib_global.h"
 #include <QImage>
 #include <libusb-1.0/libusb.h>
-//#include <i3system/i3system_TE.h>
-
 
 namespace mt4sd{
    class THERMALCAMERALIB_EXPORT ThermalCameraLib

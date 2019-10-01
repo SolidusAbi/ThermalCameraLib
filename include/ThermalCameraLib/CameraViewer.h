@@ -2,6 +2,7 @@
 #define CAMERAVIEWER_H
 
 #include <QWidget>
+#include "ThermalCameraLib_global.h"
 #include "Camera.h"
 
 namespace Ui {
@@ -10,7 +11,7 @@ namespace Ui {
 
 namespace mt4sd {
 
-    class CameraViewer : public QWidget
+    class THERMALCAMERALIB_EXPORT CameraViewer : public QWidget
     {
         Q_OBJECT
 
@@ -29,6 +30,7 @@ namespace mt4sd {
     private:
         Ui::CameraViewer *ui;
     };
+
 }
 
 #endif // CAMERAVIEWER_H

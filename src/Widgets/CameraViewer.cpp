@@ -1,5 +1,5 @@
-#include "CameraViewer.h"
 #include "ui/ui_cameraviewer.h"
+#include "CameraViewer.h"
 
 #include <QAction>
 #include <QDebug>
