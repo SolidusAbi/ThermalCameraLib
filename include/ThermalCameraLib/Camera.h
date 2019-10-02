@@ -26,7 +26,7 @@ namespace mt4sd {
         protected:
             int frameWidth;
             int frameHeight;
-            QImage *displayableFame;
+            QImage *displayableFrame;
     };
 }
 

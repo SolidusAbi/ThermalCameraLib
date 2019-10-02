@@ -16,9 +16,6 @@ find_package(Qt5 COMPONENTS Core Widgets OpenGL REQUIRED)
 find_package(i3system REQUIRED)
 find_package(realsense2 REQUIRED)
 
-message("${realsense2_LIBRARY}")
-message("${realsense2_INCLUDE_DIR}")
-
 add_library(ThermalCameraLib SHARED)
 
 target_sources(ThermalCameraLib PUBLIC
@@ -34,11 +31,11 @@ target_sources(ThermalCameraLib PUBLIC
 add_subdirectory("src/")
 
 target_include_directories(ThermalCameraLib PUBLIC include/ThermalCameraLib)
-target_include_directories(ThermalCameraLib PRIVATE /usr/local/include/i3system)
+target_include_directories(ThermalCameraLib PRIVATE ${I3SYSTEM_INCLUDE_DIRS})
 target_include_directories(ThermalCameraLib PRIVATE ${realsense2_INCLUDE_DIR})
 
-link_directories(/usr/local/lib)
-target_link_libraries(ThermalCameraLib PRIVATE Qt5::Core Qt5::Widgets i3system_imgproc_64 i3system_usb_64 i3system_te_64 usb-1.0)
+target_link_libraries(ThermalCameraLib PRIVATE Qt5::Core Qt5::Widgets usb-1.0)
+target_link_libraries(ThermalCameraLib PRIVATE ${I3SYSTEM_LIBRARIES})
 target_link_libraries(ThermalCameraLib PRIVATE ${realsense2_LIBRARY})
 
 target_compile_definitions(ThermalCameraLib PRIVATE THERMALCAMERALIB_LIBRARY)

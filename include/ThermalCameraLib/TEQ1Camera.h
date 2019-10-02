@@ -22,7 +22,6 @@ namespace mt4sd {
             i3::TE_B *pTE;
             unsigned short *pImgBuf;
             float *pRecvTemp;
-            QImage *displayableFrame;
 
             void getDisplayFrame(unsigned short *frame, int size, unsigned char *display);
     };
