@@ -56,17 +56,9 @@ QImage * mt4sd::RealSenseD415Camera::getDisplayFrame()
         auto depth = data.get_depth_frame();
         auto color = data.get_color_frame();
 
-//        qDebug() << depth.get_data_size();
         //const uint16_t *test2 = static_cast<const uint16_t *>(depth.get_data());
         const uchar *color_test2 = static_cast<const uchar *>(color.get_data());
-
-        for(size_t pixel=0; pixel < this->getFrameSize(); ++pixel)
-        {
-            for (ssize_t channel=2; channel >= 0; --channel)
-            {
-                displayableFrame->bits()[pixel * 3 + 2-channel] = color_test2[pixel * 3 + channel];
-            }
-        }
+        this->bgrToRgb(displayableFrame->bits(), color_test2, this->getFrameSize());
 
         //getDisplayFrame(test2, this->getFrameSize(), displayableFrame->bits());
 
@@ -92,7 +84,7 @@ QImage * mt4sd::RealSenseD415Camera::getDisplayFrame()
 //        }
 //        //data = reinterpret_cast<uchar>(depth.get_data());
 //        qDebug() << "Parate aquí";
-//        //TODO
+
     }
 
     return displayableFrame;
@@ -165,4 +157,10 @@ void mt4sd::RealSenseD415Camera::getDisplayFrame(const uint16_t *frame, int size
     {
         display[i] = static_cast<unsigned char>((255.0 * (frame[i] - min)) * invDelta);
     }
+}
+
+void mt4sd::RealSenseD415Camera::bgrToRgb(uchar *rgb, const uchar *bgr, size_t frameSize){
+    for(size_t pixel=0; pixel < frameSize; ++pixel)
+        for (ssize_t channel=2; channel >= 0; --channel)
+            rgb[pixel * 3 + 2 - static_cast<size_t>(channel)] = bgr[pixel * 3 + static_cast<size_t>(channel)];
 }

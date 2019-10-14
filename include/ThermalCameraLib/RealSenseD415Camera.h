@@ -37,6 +37,7 @@ namespace mt4sd {
             rs2_stream findStreamToAlign(const std::vector<rs2::stream_profile> &streams);
             void configureCamera();
             void getDisplayFrame(const uint16_t *frame, int size, unsigned char *display);
+            void bgrToRgb(uchar *rgb, const uchar *bgr, size_t frameSize);
     };
 }
 
