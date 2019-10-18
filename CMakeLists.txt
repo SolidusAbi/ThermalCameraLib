@@ -15,6 +15,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt5 COMPONENTS Core Widgets OpenGL REQUIRED)
 find_package(i3system REQUIRED)
 find_package(realsense2 REQUIRED)
+find_package(ColorMapShaders REQUIRED)
 
 add_library(ThermalCameraLib SHARED)
 
@@ -26,6 +27,7 @@ target_include_directories(ThermalCameraLib PUBLIC
 target_include_directories(ThermalCameraLib PRIVATE
     $<BUILD_INTERFACE:${I3SYSTEM_INCLUDE_DIRS}>
     $<BUILD_INTERFACE:${realsense2_INCLUDE_DIR}>
+    $<BUILD_INTERFACE:${COLORMAPSHADERS_INCLUDES_DIR}>
 )
 
 

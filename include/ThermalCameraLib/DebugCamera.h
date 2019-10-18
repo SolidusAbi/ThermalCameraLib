@@ -17,7 +17,7 @@ namespace mt4sd {
             bool disconnect() override;
 
         private:
-            float *imgBuff;
+            double *imgBuff;
     };
 }
 
