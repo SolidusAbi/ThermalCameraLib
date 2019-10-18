@@ -18,25 +18,37 @@ find_package(realsense2 REQUIRED)
 
 add_library(ThermalCameraLib SHARED)
 
+target_include_directories(ThermalCameraLib PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/ThermalCameraLib>
+    $<INSTALL_INTERFACE:include/ThermalCameraLib>
+)
+
+target_include_directories(ThermalCameraLib PRIVATE
+    $<BUILD_INTERFACE:${I3SYSTEM_INCLUDE_DIRS}>
+    $<BUILD_INTERFACE:${realsense2_INCLUDE_DIR}>
+)
+
+
 target_sources(ThermalCameraLib PUBLIC
-    include/ThermalCameraLib/ThermalCameraLib_global.h
-    include/ThermalCameraLib/Camera.h
-    include/ThermalCameraLib/TEQ1Camera.h
-    include/ThermalCameraLib/RealSenseD415Camera.h
-    include/ThermalCameraLib/CameraGLViewer.h
-    include/ThermalCameraLib/CameraViewer.h
-    include/ThermalCameraLib/thermalcameralib.h
+     $<BUILD_INTERFACE:include/ThermalCameraLib/ThermalCameraLib_global.h>
+     $<BUILD_INTERFACE:include/ThermalCameraLib/Camera.h>
+     $<BUILD_INTERFACE:include/ThermalCameraLib/TEQ1Camera.h>
+     $<BUILD_INTERFACE:include/ThermalCameraLib/RealSenseD415Camera.h>
+     $<BUILD_INTERFACE:include/ThermalCameraLib/CameraGLViewer.h>
+     $<BUILD_INTERFACE:include/ThermalCameraLib/CameraViewer.h>
+     $<BUILD_INTERFACE:include/ThermalCameraLib/thermalcameralib.h>
 )
 
 add_subdirectory("src/")
 
-target_include_directories(ThermalCameraLib PUBLIC include/ThermalCameraLib)
-target_include_directories(ThermalCameraLib PRIVATE ${I3SYSTEM_INCLUDE_DIRS})
-target_include_directories(ThermalCameraLib PRIVATE ${realsense2_INCLUDE_DIR})
-
-target_link_libraries(ThermalCameraLib PRIVATE Qt5::Core Qt5::Widgets usb-1.0)
-target_link_libraries(ThermalCameraLib PRIVATE ${I3SYSTEM_LIBRARIES})
-target_link_libraries(ThermalCameraLib PRIVATE ${realsense2_LIBRARY})
+target_link_libraries(ThermalCameraLib PRIVATE
+    Qt5::Core Qt5::Widgets
+    usb-1.0
+    ${I3SYSTEM_LIBRARIES}
+    ${realsense2_LIBRARY}
+)
+#target_link_libraries(ThermalCameraLib PRIVATE ${I3SYSTEM_LIBRARIES})
+#target_link_libraries(ThermalCameraLib PRIVATE ${realsense2_LIBRARY})
 
 target_compile_definitions(ThermalCameraLib PRIVATE THERMALCAMERALIB_LIBRARY)
 
