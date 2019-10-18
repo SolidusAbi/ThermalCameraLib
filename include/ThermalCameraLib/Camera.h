@@ -16,7 +16,7 @@ namespace mt4sd {
 
             inline int getFrameWidth(){ return frameWidth; }
             inline int getFrameHeight(){ return frameHeight; }
-            inline int getFrameSize(){ return getFrameWidth()*getFrameHeight(); }
+            inline size_t getFrameSize(){ return static_cast<size_t>(getFrameWidth()*getFrameHeight()); }
 
         public slots:
             virtual bool connect() = 0;

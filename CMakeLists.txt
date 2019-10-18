@@ -32,23 +32,20 @@ target_include_directories(ThermalCameraLib PRIVATE
 target_sources(ThermalCameraLib PUBLIC
      $<BUILD_INTERFACE:include/ThermalCameraLib/ThermalCameraLib_global.h>
      $<BUILD_INTERFACE:include/ThermalCameraLib/Camera.h>
+     $<BUILD_INTERFACE:include/ThermalCameraLib/DebugCamera.h>
      $<BUILD_INTERFACE:include/ThermalCameraLib/TEQ1Camera.h>
      $<BUILD_INTERFACE:include/ThermalCameraLib/RealSenseD415Camera.h>
      $<BUILD_INTERFACE:include/ThermalCameraLib/CameraGLViewer.h>
      $<BUILD_INTERFACE:include/ThermalCameraLib/CameraViewer.h>
-     $<BUILD_INTERFACE:include/ThermalCameraLib/thermalcameralib.h>
 )
 
 add_subdirectory("src/")
 
 target_link_libraries(ThermalCameraLib PRIVATE
     Qt5::Core Qt5::Widgets
-    usb-1.0
     ${I3SYSTEM_LIBRARIES}
     ${realsense2_LIBRARY}
 )
-#target_link_libraries(ThermalCameraLib PRIVATE ${I3SYSTEM_LIBRARIES})
-#target_link_libraries(ThermalCameraLib PRIVATE ${realsense2_LIBRARY})
 
 target_compile_definitions(ThermalCameraLib PRIVATE THERMALCAMERALIB_LIBRARY)
 
