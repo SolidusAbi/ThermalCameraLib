@@ -15,6 +15,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt5 COMPONENTS Core Widgets OpenGL REQUIRED)
 find_package(i3system REQUIRED)
 find_package(realsense2 REQUIRED)
+
+#include(SuperBuild/External_Colormap.cmake)
 find_package(ColorMapShaders REQUIRED)
 
 add_library(ThermalCameraLib SHARED)
