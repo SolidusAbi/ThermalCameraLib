@@ -16,20 +16,20 @@ find_package(Qt5 COMPONENTS Core Widgets OpenGL REQUIRED)
 find_package(i3system REQUIRED)
 find_package(realsense2 REQUIRED)
 
-#include(SuperBuild/External_Colormap.cmake)
-find_package(ColorMapShaders REQUIRED)
+
+include(SuperBuild/External_Colormap.cmake)
+#find_package(ColorMapShaders REQUIRED) #Añadir le find package
 
 add_library(ThermalCameraLib SHARED)
 
-target_include_directories(ThermalCameraLib PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/ThermalCameraLib>
-    $<INSTALL_INTERFACE:include/ThermalCameraLib>
-)
-
-target_include_directories(ThermalCameraLib PRIVATE
-    $<BUILD_INTERFACE:${I3SYSTEM_INCLUDE_DIRS}>
-    $<BUILD_INTERFACE:${realsense2_INCLUDE_DIR}>
-    $<BUILD_INTERFACE:${COLORMAPSHADERS_INCLUDES_DIR}>
+target_include_directories(ThermalCameraLib
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/ThermalCameraLib>
+        $<INSTALL_INTERFACE:include/ThermalCameraLib>
+    PRIVATE
+        $<BUILD_INTERFACE:${I3SYSTEM_INCLUDE_DIRS}>
+        $<BUILD_INTERFACE:${realsense2_INCLUDE_DIR}>
+        $<BUILD_INTERFACE:${COLORMAPSHADERS_INCLUDE_DIR}>
 )
 
 
@@ -52,4 +52,3 @@ target_link_libraries(ThermalCameraLib PRIVATE
 )
 
 target_compile_definitions(ThermalCameraLib PRIVATE THERMALCAMERALIB_LIBRARY)
-

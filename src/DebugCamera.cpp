@@ -33,7 +33,7 @@ QImage * mt4sd::DebugCamera::getDisplayFrame()
     colormap::Colormap *colormap = new colormap::MATLAB::Jet;
 
     for (size_t pixel_idx=0; pixel_idx<getFrameSize(); ++pixel_idx){
-        imgBuff[pixel_idx] = pixel_idx / static_cast<float>(getFrameSize());
+        imgBuff[pixel_idx] = pixel_idx / static_cast<double>(getFrameSize());
 
         displayableFrame->bits()[0 + pixel_idx*stride] = static_cast<uchar>(colormap->getColor(imgBuff[pixel_idx]).r * 255);
         displayableFrame->bits()[1 + pixel_idx*stride] = static_cast<uchar>(colormap->getColor(imgBuff[pixel_idx]).g * 255);
