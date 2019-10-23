@@ -4,6 +4,8 @@ project(ThermalCameraLib VERSION 0.01
                          LANGUAGES CXX)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
+option(SUPER_BUILD "Super build" ON)
+
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
@@ -12,15 +14,18 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+add_library(ThermalCameraLib SHARED)
+
 find_package(Qt5 COMPONENTS Core Widgets OpenGL REQUIRED)
 find_package(i3system REQUIRED)
 find_package(realsense2 REQUIRED)
 
-
-include(SuperBuild/External_Colormap.cmake)
-#find_package(ColorMapShaders REQUIRED) #Añadir le find package
-
-add_library(ThermalCameraLib SHARED)
+if (SUPER_BUILD)
+    include(SuperBuild/External_Colormap.cmake)    
+    add_dependencies(ThermalCameraLib ColorMapShaders) #Force to "build" Colormap-shaders first
+else()
+    find_package(ColorMapShaders REQUIRED)
+endif()
 
 target_include_directories(ThermalCameraLib
     PUBLIC
@@ -32,6 +37,11 @@ target_include_directories(ThermalCameraLib
         $<BUILD_INTERFACE:${COLORMAPSHADERS_INCLUDE_DIR}>
 )
 
+target_link_libraries(ThermalCameraLib PRIVATE
+    Qt5::Core Qt5::Widgets
+    ${I3SYSTEM_LIBRARIES}
+    ${realsense2_LIBRARY}
+)
 
 target_sources(ThermalCameraLib PUBLIC
      $<BUILD_INTERFACE:include/ThermalCameraLib/ThermalCameraLib_global.h>
@@ -45,10 +55,14 @@ target_sources(ThermalCameraLib PUBLIC
 
 add_subdirectory("src/")
 
-target_link_libraries(ThermalCameraLib PRIVATE
-    Qt5::Core Qt5::Widgets
-    ${I3SYSTEM_LIBRARIES}
-    ${realsense2_LIBRARY}
+target_compile_definitions(ThermalCameraLib PRIVATE THERMALCAMERALIB_LIBRARY)
+
+install(TARGETS ThermalCameraLib EXPORT
+    LIBRARY DESTINATION lib
 )
 
-target_compile_definitions(ThermalCameraLib PRIVATE THERMALCAMERALIB_LIBRARY)
+install(TARGETS ThermalCameraLib EXPORT ThermalCameraLib DESTINATION lib)
+install(EXPORT ThermalCameraLib DESTINATION lib/cmake)
+install(DIRECTORY include/ DESTINATION include)
+
+install(FILES ${CMAKE_SOURCE_DIR}/cmake/ThermalCameraLibConfig.cmake DESTINATION lib/cmake)
